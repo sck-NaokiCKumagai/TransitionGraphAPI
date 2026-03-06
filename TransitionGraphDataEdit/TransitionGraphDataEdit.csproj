@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>TransitionGraphDataEdit</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.33.3" />
+    <PackageReference Include="Grpc.Tools" Version="2.65.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GlobalCache\GlobalCache.csproj" />
+    <ProjectReference Include="..\TransitionGraphDtos\TransitionGraphDtos.csproj" />
+    <ProjectReference Include="..\PortSetting\PortSetting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\PortSetting\PortSetting.properties" Link="PortSetting.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Protobuf Include="..\Protos\TransitionGraph.proto" GrpcServices="Both" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Include="..\Shared\Cursor.cs" Link="Shared\Cursor.cs" />
+    <Compile Include="..\Shared\ResultStore.cs" Link="Shared\ResultStore.cs" />
+    <Compile Include="..\Shared\HealthControlServices.cs" Link="Shared\HealthControlServices.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="DXC.EngPF.Core.Grid">
+      <HintPath>..\DLL\DXC.EngPF.Core.Grid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="data\GridCsv\sample.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

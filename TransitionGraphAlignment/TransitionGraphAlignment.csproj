@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>TransitionGraphAlignment</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.33.3" />
+    <PackageReference Include="Grpc.Tools" Version="2.65.0" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="..\Protos\TransitionGraph.proto" GrpcServices="Both" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TransitionGraphDtos\TransitionGraphDtos.csproj" />
+    <!-- DummyDLL は DXC.EngPF.Core.Grid.dll(実機) とアセンブリ名が衝突するため参照しない -->
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\GlobalCache\GlobalCache.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\Cursor.cs" Link="Shared\Cursor.cs" />
+    <Compile Include="..\Shared\ResultStore.cs" Link="Shared\ResultStore.cs" />
+    <Compile Include="..\Shared\HealthControlServices.cs" Link="Shared\HealthControlServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Use Update (not Include) to avoid duplicate Content items with SDK implicit items --><Content Update="data\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="data\GridCsv\sample.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="data\GridCsv\sample-id8-guid.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>  <ItemGroup>
+    <!-- Copy all DXC-related DLLs under root\DLL into output\DLL so the runtime can resolve dependencies (e.g. DXC.EngPF.Framework.Log.dll). -->
+    <None Include="..\DLL\*.dll" Condition="Exists('..\DLL')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>DLL\%(Filename)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "CTransitionGraphAPI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:52934;http://localhost:52935"
+    }
+  }
+}

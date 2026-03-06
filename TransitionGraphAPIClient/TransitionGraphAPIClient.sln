@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitionGraphAPIClient", "TransitionGraphAPIClient.csproj", "{B02468B4-050F-4B4E-B42E-72E56A752EEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTransitionGraphAPI", "..\CTransitionGraphAPI\CTransitionGraphAPI.csproj", "{A46ABA30-97BA-5E40-3333-1B697FDA0F5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTransitionGraphOutput", "..\CTransitionGraphOutput\CTransitionGraphOutput.csproj", "{FC4D0E92-DD09-5CA8-A7AF-383D7B71A428}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogOutPut", "..\LogOutPut\LogOutPut.csproj", "{9FB0CB90-B4AF-E595-FF01-78031B51E961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitionGraphDtos", "..\TransitionGraphDtos\TransitionGraphDtos.csproj", "{BEDFAC69-8F7A-039A-24D5-6BB01DE5AC9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortSetting", "..\PortSetting\PortSetting.csproj", "{58BEB28D-7B0C-4772-AF66-1589DD3D813D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B02468B4-050F-4B4E-B42E-72E56A752EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02468B4-050F-4B4E-B42E-72E56A752EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02468B4-050F-4B4E-B42E-72E56A752EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02468B4-050F-4B4E-B42E-72E56A752EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A46ABA30-97BA-5E40-3333-1B697FDA0F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A46ABA30-97BA-5E40-3333-1B697FDA0F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A46ABA30-97BA-5E40-3333-1B697FDA0F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A46ABA30-97BA-5E40-3333-1B697FDA0F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4D0E92-DD09-5CA8-A7AF-383D7B71A428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4D0E92-DD09-5CA8-A7AF-383D7B71A428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4D0E92-DD09-5CA8-A7AF-383D7B71A428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4D0E92-DD09-5CA8-A7AF-383D7B71A428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB0CB90-B4AF-E595-FF01-78031B51E961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB0CB90-B4AF-E595-FF01-78031B51E961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB0CB90-B4AF-E595-FF01-78031B51E961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB0CB90-B4AF-E595-FF01-78031B51E961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEDFAC69-8F7A-039A-24D5-6BB01DE5AC9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEDFAC69-8F7A-039A-24D5-6BB01DE5AC9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEDFAC69-8F7A-039A-24D5-6BB01DE5AC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEDFAC69-8F7A-039A-24D5-6BB01DE5AC9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BEB28D-7B0C-4772-AF66-1589DD3D813D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BEB28D-7B0C-4772-AF66-1589DD3D813D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BEB28D-7B0C-4772-AF66-1589DD3D813D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BEB28D-7B0C-4772-AF66-1589DD3D813D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5458F5F9-283A-47DD-805C-9F335D9E11D4}
+	EndGlobalSection
+EndGlobal

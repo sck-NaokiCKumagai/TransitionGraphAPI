@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "新しいプロファイル",
+    "Projects": [
+      {
+        "Path": "TransitionGraphAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\TrasitionGraphDBAccess\\TrasitionGraphDBAccess.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\TransitionGraphDataEdit\\TransitionGraphDataEdit.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

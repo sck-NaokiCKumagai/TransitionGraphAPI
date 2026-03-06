@@ -1,0 +1,172 @@
+// NuGet Grpc.Tools する
+syntax = "proto3";
+package TransitionGraph.v1;
+option csharp_namespace = "TransitionGraph.V1";
+
+import "google/protobuf/empty.proto";
+
+message HealthReply {
+  string status = 1; // "OK"
+  string message = 2;
+}
+
+service Health {
+  rpc Check(google.protobuf.Empty) returns (HealthReply);
+}
+
+message ShutdownReply {
+  string message = 1;
+}
+
+service Control {
+  rpc Shutdown(google.protobuf.Empty) returns (ShutdownReply);
+}
+
+// ====== Core DTOs ======
+
+// Common request header shared by all requests.
+// Additive changes only (append new field numbers).
+// Request header based on 定義情報.xlsx
+// Additive changes only (append new field numbers).
+enum RequestResultStatus {
+  RUNNING = 0;
+  OK = 1;
+  NG = 2;
+  CANCEL = 3;
+}
+
+message RequestKeyValue {
+  repeated string itemName = 1;
+}
+
+message RequestHeader {
+  // Excel: GUID
+  string guid = 1;
+  // Excel: RequestId (1-9)
+  string requestId = 2;
+  // Excel: SequenceNo
+  string sequenceNo = 3;
+  // Excel: parameter[10]
+  repeated string parameter = 4;
+  // Excel: reqKey.RequestKey (Dictionary<LotName, List<ItemName>>)
+  map<string, RequestKeyValue> requestKey = 5;
+  // Excel: RequestResult
+  RequestResultStatus requestResult = 6;
+  // Optional: identifies one client request instance (GUID string). Used for cancel.
+  string requestInstanceId = 7;
+}
+message Point {
+  int32 rowNo = 1;
+  string value = 2;
+}
+
+// ====== DataEdit ======
+message BuildRequest {
+  RequestHeader header = 1;
+
+  // DBAccess sql key and parameters (optional for requestKey=1 fixed response)
+  string sqlKey = 2;
+  map<string, string> parameters = 3;
+
+  // for template/demo: allow caller to choose (default 60000)
+  int32 totalCount = 4;
+}
+
+message BuildReply {
+  RequestHeader header = 1;
+  string resultId = 2;
+  int32 totalCount = 3;
+  string message = 4;
+}
+
+service DataEdit {
+  rpc BuildResultSet(BuildRequest) returns (BuildReply);
+
+  // Cancel a running request and cleanup related caches.
+  rpc Cancel(CancelRequest) returns (CancelReply);
+}
+
+// ====== Alignment ======
+// RequestId 8-9 are routed to this service.
+// (Not fully implemented yet - placeholder worker exists.)
+service Alignment {
+  rpc BuildResultSet(BuildRequest) returns (BuildReply);
+
+  // Cancel a running request and cleanup related caches.
+  rpc Cancel(CancelRequest) returns (CancelReply);
+}
+
+message CancelRequest {
+  RequestHeader header = 1;
+  // Optional: if known, the resultId created by BuildResultSet.
+  string resultId = 2;
+}
+
+message CancelReply {
+  string message = 1;
+  bool canceled = 2;
+}
+
+// ====== DBAccess ======
+
+message OpenQueryRequest {
+  string resultId = 1;
+  string sqlKey = 2;
+  map<string, string> parameters = 3;
+}
+
+message OpenQueryReply {
+  string message = 1;
+}
+
+message FetchPageRequest {
+  string resultId = 1;
+  int32 lastRowNo = 2;
+  int32 pageSize = 3;
+}
+
+message PageReply {
+  repeated Point items = 1;
+  int32 nextLastRowNo = 2; // 0 if done
+  bool done = 3;
+  int32 returnedCount = 4;
+}
+
+service DBAccess {
+  rpc OpenQuery(OpenQueryRequest) returns (OpenQueryReply);
+
+  rpc FetchPage(FetchPageRequest) returns (PageReply);
+
+  // Cancel and cleanup a registered query context for the given resultId.
+  rpc CancelQuery(CancelQueryRequest) returns (CancelQueryReply);
+
+  // Diagnostic: probe ITEM_CONVERT_MASTER (returns count + sample rows)
+  rpc ProbeItemConvertMaster(ProbeItemConvertMasterRequest) returns (ProbeItemConvertMasterReply);
+}
+
+message CancelQueryRequest {
+  string resultId = 1;
+}
+
+message CancelQueryReply {
+  string message = 1;
+  bool removed = 2;
+}
+
+// ====== Diagnostics (DBAccess) ======
+message ProbeItemConvertMasterRequest {
+  int32 maxRows = 1;     // upper bound fetch count
+  int32 sampleRows = 2;  // how many rows to return in 'sample'
+}
+
+message ItemConvertRow {
+  string equipmentId = 1;
+  int64 convertOrder = 2;
+  string convertMethod = 3;
+}
+
+message ProbeItemConvertMasterReply {
+  string message = 1;
+  int32 rowsFetched = 2;
+  repeated ItemConvertRow sample = 3;
+}
